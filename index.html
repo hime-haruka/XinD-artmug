@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>씬디님-아트머그</title>
+
+    <link rel="stylesheet" href="./static/css/common.css">
+</head>
+<body>
+    <main class="main">
+        <section class="sec" id="intro"></section>
+        <section class="sec" id="slot"></section>
+        <section class="sec" id="notice"></section>
+        <section class="sec" id="sample"></section>
+        <section class="sec" id="form">
+        <div class="sec-frame form-shell">
+            <div class="ui-window form-window">
+            <div class="ui-cloud is-2 top-right"></div>
+
+            <div class="ui-window__bar">
+                <div class="ui-window__title">
+                <span class="ui-window__dots">
+                    <span class="ui-dot is-sky"></span>
+                    <span class="ui-dot is-blue"></span>
+                    <span class="ui-dot is-white"></span>
+                </span>
+                <span>문의 양식</span>
+                </div>
+            </div>
+
+            <div class="ui-window__body form-body">
+                <header class="form-hero">
+                <h2 class="form-title">신청 양식</h2>
+                <p class="form-desc">항목을 선택한 뒤 복사해서 문의로 전달해주세요.</p>
+                </header>
+
+                <div class="form-grid">
+                <section class="form-panel">
+                    <div class="form-panel__head">
+                    <h3 class="form-panel__title">기본 정보</h3>
+                    </div>
+
+                    <div class="form-row">
+                    <label class="form-label" for="formPlatformNickname">방송 플랫폼 / 닉네임</label>
+                    <input
+                        id="formPlatformNickname"
+                        class="form-input"
+                        type="text"
+                        placeholder="예: 치지직 / 씬디"
+                    >
+                    <p class="form-help">활동중이신 플랫폼과 닉네임을 기재해주세요.</p>
+                    </div>
+                </section>
+
+                <section class="form-panel">
+                    <div class="form-panel__head">
+                    <h3 class="form-panel__title">신청 옵션 선택</h3>
+                    </div>
+
+                    <div class="form-check-grid">
+                    <label class="form-check">
+                        <input type="checkbox" class="form-category-check" data-target="option-sub-emote">
+                        <span>구독티콘</span>
+                    </label>
+
+                    <label class="form-check">
+                        <input type="checkbox" class="form-category-check" data-target="option-sub-badge">
+                        <span>구독뱃지</span>
+                    </label>
+
+                    <label class="form-check">
+                        <input type="checkbox" class="form-category-check" data-target="option-profile">
+                        <span>프로필</span>
+                    </label>
+
+                    <label class="form-check">
+                        <input type="checkbox" class="form-category-check" data-target="option-banner">
+                        <span>하단배너</span>
+                    </label>
+
+                    <label class="form-check">
+                        <input type="checkbox" class="form-category-check" data-target="option-ziptok">
+                        <span>짚톡</span>
+                    </label>
+
+                    <label class="form-check">
+                        <input type="checkbox" class="form-category-check" data-target="option-illust">
+                        <span>일러스트</span>
+                    </label>
+                    </div>
+
+                    <div class="form-option-list">
+                    <div class="form-option-card" id="option-sub-emote" hidden>
+                        <div class="form-option-card__title">구독티콘</div>
+                        <div class="form-option-fields">
+                        <div class="form-field">
+                            <label class="form-label" for="subEmoteType">세부 옵션</label>
+                            <select id="subEmoteType" class="form-select">
+                            <option value="">선택해주세요</option>
+                            <option>구독티콘 / 1개</option>
+                            <option>구독티콘 / 3개 세트</option>
+                            <option>구독티콘 / 10개 세트</option>
+                            <option>움짤티콘 / 1개</option>
+                            <option>움짤티콘 / 3개 세트</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="form-option-card" id="option-sub-badge" hidden>
+                        <div class="form-option-card__title">구독뱃지</div>
+                        <div class="form-option-fields">
+                        <div class="form-field">
+                            <label class="form-label" for="subBadgeType">세부 옵션</label>
+                            <select id="subBadgeType" class="form-select">
+                            <option value="">선택해주세요</option>
+                            <option>구독뱃지 / 1개</option>
+                            <option>구독뱃지 / 반복형 6개 세트</option>
+                            <option>구독뱃지 / 반복형 12개 세트</option>
+                            <option>움짤뱃지 / 1개</option>
+                            <option>움짤뱃지 / 반복형 6개 세트</option>
+                            <option>움짤뱃지 / 반복형 12개 세트</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="form-option-card" id="option-profile" hidden>
+                        <div class="form-option-card__title">프로필</div>
+                        <div class="form-option-fields">
+                        <div class="form-field">
+                            <label class="form-label" for="profileType">세부 옵션</label>
+                            <select id="profileType" class="form-select">
+                            <option value="">선택해주세요</option>
+                            <option>프로필 / 비상업용</option>
+                            <option>프로필 / 방송용</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="form-option-card" id="option-banner" hidden>
+                        <div class="form-option-card__title">하단배너</div>
+                        <div class="form-option-fields">
+                        <div class="form-field">
+                            <label class="form-label" for="bannerType">세부 옵션</label>
+                            <select id="bannerType" class="form-select">
+                            <option value="">선택해주세요</option>
+                            <option>하단배너 / 고정형</option>
+                            <option>하단배너 / 종류 추가</option>
+                            <option>하단배너 / 자유형 1개</option>
+                            <option>하단배너 / 자유형 3개 세트</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="form-option-card" id="option-ziptok" hidden>
+                        <div class="form-option-card__title">짚톡</div>
+                        <div class="form-option-fields">
+                        <div class="form-field">
+                            <label class="form-label" for="ziptokType">세부 옵션</label>
+                            <select id="ziptokType" class="form-select">
+                            <option value="">선택해주세요</option>
+                            <option>짚톡 / 기본 반신 (차렷자세)</option>
+                            <option>짚톡 / 책상 세트 (키보드 or 게임패드 + 소품)</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="form-option-card" id="option-illust" hidden>
+                        <div class="form-option-card__title">일러스트</div>
+                        <div class="form-option-fields">
+                        <div class="form-field">
+                            <label class="form-label" for="illustType">세부 옵션</label>
+                            <select id="illustType" class="form-select">
+                            <option value="">선택해주세요</option>
+                            <option>일러스트 / MD 전신 개인용</option>
+                            <option>일러스트 / MD 전신 방송용</option>
+                            <option>일러스트 / MD 전신 상업용</option>
+                            <option>일러스트 / SD 개인용 흉상</option>
+                            <option>일러스트 / SD 개인용 전신</option>
+                            <option>일러스트 / SD 방송용 흉상</option>
+                            <option>일러스트 / SD 방송용 전신</option>
+                            <option>일러스트 / SD 상업용 흉상</option>
+                            <option>일러스트 / SD 상업용 전신</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </section>
+
+                <section class="form-panel form-panel--compact">
+                    <div class="form-panel__head">
+                    <h3 class="form-panel__title">자료 및 요청사항</h3>
+                    </div>
+
+                    <div class="form-request-grid">
+                    <div class="form-field">
+                        <label class="form-label" for="formCharacterRef">캐릭터 자료</label>
+                        <textarea
+                        id="formCharacterRef"
+                        class="form-textarea is-short"
+                        rows="4"
+                        placeholder="상반신과 팔 전체가 드러나는 자료를 첨부해주세요. 추가 설명 자유"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-label" for="formRequestContent">신청 내용</label>
+                        <textarea
+                        id="formRequestContent"
+                        class="form-textarea is-short"
+                        rows="4"
+                        placeholder="예: 하이, 응원봉, 하트안기 신청합니다. 배너는 유튜브와 디스코드로 부탁드립니다."
+                        ></textarea>
+                    </div>
+
+                    <div class="form-field form-field--full">
+                        <label class="form-label" for="formEtcRequest">기타 요청사항</label>
+                        <textarea
+                        id="formEtcRequest"
+                        class="form-textarea is-mini"
+                        rows="3"
+                        placeholder="빠른마감, 일정 기간 비공개 등 필요하신 부분을 기재해주세요."
+                        ></textarea>
+                    </div>
+                    </div>
+                </section>
+                </div>
+
+                <div class="form-actions">
+                <button type="button" class="ui-btn is-fill form-action-btn" id="copyFormBtn">양식 복사</button>
+                <button type="button" class="ui-btn is-soft form-action-btn" id="resetFormBtn">초기화</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        </section>
+    </main>
+</body>
+
+<script src="./static/js/app.js" defer></script>
+</html>
+
