@@ -460,6 +460,7 @@
   }
 }
 
+/* === 2026-03 sample nav + image refinement === */
 .sample-nav-wrap{position:sticky;top:14px;z-index:40;padding:10px 0 2px;}
 .sample-nav{padding:14px 16px;border:1.5px solid rgba(108,164,223,.36);border-radius:999px;background:rgba(255,255,255,.82);backdrop-filter:blur(10px);box-shadow:var(--shadow-sm);}
 .sample-thumb,.sample-item{border:0;background:transparent;box-shadow:none;border-radius:20px;}

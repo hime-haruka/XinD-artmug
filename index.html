@@ -66,126 +66,142 @@
                     <label class="form-check"><input type="checkbox" class="form-category-check" data-target="option-profile"><span>프로필 사진</span></label>
                     <label class="form-check"><input type="checkbox" class="form-category-check" data-target="option-banner"><span>하단배너</span></label>
                     <label class="form-check"><input type="checkbox" class="form-category-check" data-target="option-ziptok"><span>짚톡</span></label>
-                    <label class="form-check"><input type="checkbox" class="form-category-check" data-target="option-illust"><span>일러스트</span></label>
+                    <label class="form-check"><input type="checkbox" class="form-category-check" data-target="option-sd-full"><span>SD 일러스트 (전신)</span></label>
+                    <label class="form-check"><input type="checkbox" class="form-category-check" data-target="option-sd-bust"><span>SD 일러스트 (흉상)</span></label>
+                    <label class="form-check"><input type="checkbox" class="form-category-check" data-target="option-md-full"><span>MD 일러스트 (전신)</span></label>
                     </div>
 
                     <div class="form-option-list">
                     <div class="form-option-card" id="option-sub-emote" hidden>
+                        <div class="form-option-row">
                         <div class="form-option-card__title">구독티콘</div>
-                        <div class="form-option-fields">
-                        <div class="form-field">
-                            <label class="form-label" for="subEmoteQty">수량</label>
-                            <input id="subEmoteQty" class="form-input form-input--qty" type="number" min="1" step="1" placeholder="개수 입력">
+                        <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="subEmoteQty">수량</label>
+                            <input id="subEmoteQty" class="form-input form-input--qty form-input--compact" type="number" min="1" step="1" placeholder="0">
                         </div>
                         </div>
                     </div>
 
                     <div class="form-option-card" id="option-anim-emote" hidden>
+                        <div class="form-option-row">
                         <div class="form-option-card__title">움짤티콘</div>
-                        <div class="form-option-fields">
-                        <div class="form-field">
-                            <label class="form-label" for="animEmoteQty">수량</label>
-                            <input id="animEmoteQty" class="form-input form-input--qty" type="number" min="1" step="1" placeholder="개수 입력">
+                        <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="animEmoteQty">수량</label>
+                            <input id="animEmoteQty" class="form-input form-input--qty form-input--compact" type="number" min="1" step="1" placeholder="0">
                         </div>
                         </div>
                     </div>
 
                     <div class="form-option-card" id="option-sub-badge" hidden>
+                        <div class="form-option-row">
                         <div class="form-option-card__title">구독뱃지</div>
-                        <div class="form-option-fields">
-                        <div class="form-field">
-                            <label class="form-label" for="subBadgeQty">수량</label>
-                            <input id="subBadgeQty" class="form-input form-input--qty" type="number" min="1" step="1" placeholder="개수 입력">
+                        <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="subBadgeQty">수량</label>
+                            <input id="subBadgeQty" class="form-input form-input--qty form-input--compact" type="number" min="1" step="1" placeholder="0">
                         </div>
                         </div>
                     </div>
 
                     <div class="form-option-card" id="option-anim-badge" hidden>
+                        <div class="form-option-row">
                         <div class="form-option-card__title">움짤뱃지</div>
-                        <div class="form-option-fields">
-                        <div class="form-field">
-                            <label class="form-label" for="animBadgeQty">수량</label>
-                            <input id="animBadgeQty" class="form-input form-input--qty" type="number" min="1" step="1" placeholder="개수 입력">
+                        <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="animBadgeQty">수량</label>
+                            <input id="animBadgeQty" class="form-input form-input--qty form-input--compact" type="number" min="1" step="1" placeholder="0">
                         </div>
                         </div>
                     </div>
 
                     <div class="form-option-card" id="option-profile" hidden>
+                        <div class="form-option-row">
                         <div class="form-option-card__title">프로필 사진</div>
-                        <div class="form-option-fields">
-                        <div class="form-field">
-                            <label class="form-label" for="profileQty">수량</label>
-                            <input id="profileQty" class="form-input form-input--qty" type="number" min="1" step="1" placeholder="개수 입력">
+                        <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="profileQty">수량</label>
+                            <input id="profileQty" class="form-input form-input--qty form-input--compact" type="number" min="1" step="1" placeholder="0">
                         </div>
                         </div>
                     </div>
 
                     <div class="form-option-card" id="option-banner" hidden>
-                        <div class="form-option-card__title">하단배너</div>
-                        <div class="form-option-fields form-split-grid">
-                        <div class="form-field">
-                            <label class="form-label" for="bannerFixedQty">고정형</label>
-                            <input id="bannerFixedQty" class="form-input form-input--qty" type="number" min="0" step="1" placeholder="수량">
+                        <div class="form-option-card__title" style="margin-bottom: 10px;">하단배너</div>
+                        <div class="form-compact-grid form-compact-grid--two">
+                        <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="bannerFixedQty">고정형</label>
+                            <input id="bannerFixedQty" class="form-input form-input--qty form-input--compact" type="number" min="0" step="1" placeholder="0">
                         </div>
-                        <div class="form-field">
-                            <label class="form-label" for="bannerFreeQty">자유형</label>
-                            <input id="bannerFreeQty" class="form-input form-input--qty" type="number" min="0" step="1" placeholder="수량">
+                        <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="bannerFreeQty">자유형</label>
+                            <input id="bannerFreeQty" class="form-input form-input--qty form-input--compact" type="number" min="0" step="1" placeholder="0">
                         </div>
                         </div>
                     </div>
 
                     <div class="form-option-card" id="option-ziptok" hidden>
-                        <div class="form-option-card__title">짚톡</div>
-                        <div class="form-option-fields form-split-grid">
-                        <div class="form-field">
-                            <label class="form-label" for="ziptokStandQty">차렷</label>
-                            <input id="ziptokStandQty" class="form-input form-input--qty" type="number" min="0" step="1" placeholder="수량">
+                        <div class="form-option-card__title" style="margin-bottom: 10px;">짚톡</div>
+                        <div class="form-compact-grid form-compact-grid--two">
+                        <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="ziptokStandQty">차렷</label>
+                            <input id="ziptokStandQty" class="form-input form-input--qty form-input--compact" type="number" min="0" step="1" placeholder="0">
                         </div>
-                        <div class="form-field">
-                            <label class="form-label" for="ziptokDeskQty">책상 세트 (키보드 or 게임패드 + 소품)</label>
-                            <input id="ziptokDeskQty" class="form-input form-input--qty" type="number" min="0" step="1" placeholder="수량">
+                        <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="ziptokDeskQty">책상 세트</label>
+                            <input id="ziptokDeskQty" class="form-input form-input--qty form-input--compact" type="number" min="0" step="1" placeholder="0">
                         </div>
+                        </div>
+                        <p class="form-help">책상 세트는 키보드 또는 게임패드 + 소품 구성입니다.</p>
+                    </div>
+
+                    <div class="form-option-card form-option-card--illust" id="option-sd-full" hidden>
+                        <div class="form-option-card__title" style="margin-bottom: 10px;">SD 일러스트 (전신)</div>
+                        <div class="form-license-list form-license-list--triple">
+                          <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="sdFullPersonalQty">개인용</label>
+                            <input id="sdFullPersonalQty" class="form-input form-input--qty form-input--compact" type="number" min="0" step="1" placeholder="0">
+                          </div>
+                          <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="sdFullStreamQty">방송용</label>
+                            <input id="sdFullStreamQty" class="form-input form-input--qty form-input--compact" type="number" min="0" step="1" placeholder="0">
+                          </div>
+                          <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="sdFullCommercialQty">상업용</label>
+                            <input id="sdFullCommercialQty" class="form-input form-input--qty form-input--compact" type="number" min="0" step="1" placeholder="0">
+                          </div>
                         </div>
                     </div>
 
-                    <div class="form-option-card" id="option-illust" hidden>
-                        <div class="form-option-card__title">일러스트</div>
-                        <div class="form-option-fields">
-                        <div class="form-segment" role="group" aria-label="일러스트 타입">
-                            <label class="form-chip"><input type="radio" name="illustType" value="SD"><span>SD</span></label>
-                            <label class="form-chip"><input type="radio" name="illustType" value="MD"><span>MD</span></label>
+                    <div class="form-option-card form-option-card--illust" id="option-sd-bust" hidden>
+                        <div class="form-option-card__title" style="margin-bottom: 10px;">SD 일러스트 (흉상)</div>
+                        <div class="form-license-list form-license-list--triple">
+                          <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="sdBustPersonalQty">개인용</label>
+                            <input id="sdBustPersonalQty" class="form-input form-input--qty form-input--compact" type="number" min="0" step="1" placeholder="0">
+                          </div>
+                          <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="sdBustStreamQty">방송용</label>
+                            <input id="sdBustStreamQty" class="form-input form-input--qty form-input--compact" type="number" min="0" step="1" placeholder="0">
+                          </div>
+                          <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="sdBustCommercialQty">상업용</label>
+                            <input id="sdBustCommercialQty" class="form-input form-input--qty form-input--compact" type="number" min="0" step="1" placeholder="0">
+                          </div>
                         </div>
+                    </div>
 
-                        <div class="form-branch" id="illustSdBranch" hidden>
-                            <div class="form-field">
-                            <label class="form-label">SD 구도</label>
-                            <div class="form-segment" role="group" aria-label="SD 구도">
-                                <label class="form-chip"><input type="radio" name="illustSdPose" value="전신"><span>전신</span></label>
-                                <label class="form-chip"><input type="radio" name="illustSdPose" value="흉상"><span>흉상</span></label>
-                            </div>
-                            </div>
-                        </div>
-
-                        <div class="form-license-grid">
-                            <label class="form-check form-check--subtle"><input type="checkbox" id="illustPersonalCheck"><span>개인용</span></label>
-                            <label class="form-check form-check--subtle"><input type="checkbox" id="illustStreamCheck"><span>방송용</span></label>
-                            <label class="form-check form-check--subtle"><input type="checkbox" id="illustCommercialCheck"><span>상업용</span></label>
-                        </div>
-
-                        <div class="form-license-qty-grid">
-                            <div class="form-field" id="illustPersonalQtyWrap" hidden>
-                            <label class="form-label" for="illustPersonalQty">개인용 수량</label>
-                            <input id="illustPersonalQty" class="form-input form-input--qty" type="number" min="1" step="1" placeholder="수량 입력">
-                            </div>
-                            <div class="form-field" id="illustStreamQtyWrap" hidden>
-                            <label class="form-label" for="illustStreamQty">방송용 수량</label>
-                            <input id="illustStreamQty" class="form-input form-input--qty" type="number" min="1" step="1" placeholder="수량 입력">
-                            </div>
-                            <div class="form-field" id="illustCommercialQtyWrap" hidden>
-                            <label class="form-label" for="illustCommercialQty">상업용 수량</label>
-                            <input id="illustCommercialQty" class="form-input form-input--qty" type="number" min="1" step="1" placeholder="수량 입력">
-                            </div>
-                        </div>
+                    <div class="form-option-card form-option-card--illust" id="option-md-full" hidden>
+                        <div class="form-option-card__title" style="margin-bottom: 10px;">MD 일러스트 (전신)</div>
+                        <div class="form-license-list form-license-list--triple">
+                          <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="mdFullPersonalQty">개인용</label>
+                            <input id="mdFullPersonalQty" class="form-input form-input--qty form-input--compact" type="number" min="0" step="1" placeholder="0">
+                          </div>
+                          <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="mdFullStreamQty">방송용</label>
+                            <input id="mdFullStreamQty" class="form-input form-input--qty form-input--compact" type="number" min="0" step="1" placeholder="0">
+                          </div>
+                          <div class="form-inline-field">
+                            <label class="form-inline-field__label" for="mdFullCommercialQty">상업용</label>
+                            <input id="mdFullCommercialQty" class="form-input form-input--qty form-input--compact" type="number" min="0" step="1" placeholder="0">
+                          </div>
                         </div>
                     </div>
                     </div>
@@ -239,6 +255,7 @@
         </div>
         </section>
     </main>
+
     <button type="button" class="top-btn" id="topBtn" aria-label="페이지 상단으로 이동"><span class="top-btn__arrow"></span></button>
 </body>
 
