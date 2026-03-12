@@ -709,3 +709,13 @@ button{
 .top-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);}
 .top-btn__arrow{width:14px;height:14px;border-left:3px solid var(--ink);border-top:3px solid var(--ink);transform:rotate(45deg) translate(2px,2px);}
 @media (max-width:768px){.top-btn{right:16px;bottom:16px;width:52px;height:52px;}}
+@media (max-width: 768px){
+  .sample-nav-wrap{
+    position:static !important;
+    top:auto !important;
+  }
+
+  .sample-nav{
+    position:static !important;
+  }
+}

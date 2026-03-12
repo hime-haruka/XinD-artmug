@@ -654,8 +654,6 @@ function createSampleCategoryBlock({ category, prices, samples }) {
 
 function createSampleSubBlock({ category, subSection, prices, samples }) {
   const thumbLimit = SAMPLE_THUMB_LIMITS[category.id] ?? category.thumbCount ?? 0;
-  const thumbCols = Math.max(1, Number(category.columns || 1));
-  const listCols = Math.max(1, Number(category.columns || 1));
   const priceCols = category.id === "illust" ? 3 : 2;
   const useContain = ["ziptok", "illust"].includes(category.id);
 
@@ -667,6 +665,24 @@ function createSampleSubBlock({ category, subSection, prices, samples }) {
     : samples;
 
   const groupedSamples = groupSampleItems(detailBaseSamples, subSection);
+
+const forceSingleColumn = ["ziptok", "illust"].includes(category.id);
+
+const thumbCols = forceSingleColumn
+  ? 1
+  : Math.min(
+      Math.max(1, Number(category.columns || 1)),
+      Math.max(1, thumbSamples.length)
+    );
+
+const detailItemCount = groupedSamples.reduce((sum, group) => sum + group.items.length, 0);
+
+const listCols = forceSingleColumn
+  ? 1
+  : Math.min(
+      Math.max(1, Number(category.columns || 1)),
+      Math.max(1, detailItemCount)
+    );
 
   const notesKey = `${category.id}::${subSection}`;
   const notes =
