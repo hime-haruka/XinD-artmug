@@ -242,14 +242,27 @@ function createSlotRow(row) {
   const month = escapeHtml((row.month || "").trim());
   const week = escapeHtml((row.week || "").trim());
 
-  const slots = ["slot 1", "slot 2", "slot 3", "slot 4"]
+  const slotKeys = Object.keys(row)
+    .filter((key) => /^slot\s*\d+$/i.test(key))
+    .sort((a, b) => {
+      const aNum = Number(a.match(/\d+/)?.[0] || 0);
+      const bNum = Number(b.match(/\d+/)?.[0] || 0);
+      return aNum - bNum;
+    });
+
+  const slots = slotKeys
     .map((key) => {
-      const value = String(row[key] || "").trim().toLowerCase();
+      const raw = String(row[key] || "").trim();
+      if (!raw) return "";
+
+      const value = raw.toLowerCase();
       const isOpen = value === "open";
 
       return `
         <div class="slot-cell ${isOpen ? "is-open" : "is-closed"}">
-          <span class="slot-status">${isOpen ? "○ OPEN" : "● CLOSED"}</span>
+          <span class="slot-status">
+            ${isOpen ? "○ OPEN" : "● CLOSED"}
+          </span>
         </div>
       `;
     })
@@ -258,7 +271,9 @@ function createSlotRow(row) {
   return `
     <div class="slot-row">
       <div class="slot-row__title">${month}월 ${week}주차</div>
-      <div class="slot-row__cells">${slots}</div>
+      <div class="slot-row__cells">
+        ${slots}
+      </div>
     </div>
   `;
 }
