@@ -670,7 +670,7 @@ function createSampleCategoryBlock({ category, prices, samples }) {
 function createSampleSubBlock({ category, subSection, prices, samples }) {
   const thumbLimit = SAMPLE_THUMB_LIMITS[category.id] ?? category.thumbCount ?? 0;
   const priceCols = category.id === "illust" ? 3 : 2;
-  const useContain = true;
+  const useContain = ["ziptok", "illust", "fanchr"].includes(category.id);
 
   const thumbSamples = getRepresentativeSamples(samples, thumbLimit);
 
@@ -1246,4 +1246,5 @@ function escapeHtml(value) {
   syncLicenseQty();
   syncTopButton();
 })();
+
 
