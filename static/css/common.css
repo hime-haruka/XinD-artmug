@@ -701,3 +701,11 @@ button{
     opacity: .82;
   }
 }
+
+
+/* === 2026-03 top button === */
+.top-btn{position:fixed;right:26px;bottom:26px;z-index:70;width:58px;height:58px;border:2px solid var(--line-strong);border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.98) 0%,rgba(224,241,255,.96) 100%);box-shadow:var(--shadow-md);display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .18s ease,visibility .18s ease,transform .18s ease,box-shadow .18s ease;}
+.top-btn.is-visible{opacity:1;visibility:visible;transform:translateY(0);}
+.top-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);}
+.top-btn__arrow{width:14px;height:14px;border-left:3px solid var(--ink);border-top:3px solid var(--ink);transform:rotate(45deg) translate(2px,2px);}
+@media (max-width:768px){.top-btn{right:16px;bottom:16px;width:52px;height:52px;}}

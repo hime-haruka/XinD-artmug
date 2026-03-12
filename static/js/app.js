@@ -451,7 +451,8 @@ function createNoticeGroupCard(groupData) {
       `
       : "";
 
-  return `
+  
+return `
     <article class="notice-card ui-window">
       <div class="ui-cloud ${cloudClass} top-right"></div>
 
@@ -469,18 +470,18 @@ function createNoticeGroupCard(groupData) {
       <div class="ui-window__body notice-card__body">
         ${imageMarkup}
 
-        <ol class="notice-items">
+        <ul class="notice-items">
           ${items
             .map(
               (item) => `
             <li class="notice-item">
-              <span class="notice-item__num">${String(item.order).padStart(2, "0")}</span>
+              <span class="notice-item__dot" aria-hidden="true"></span>
               <p class="notice-item__desc">${escapeHtml(item.desc)}</p>
             </li>
           `
             )
             .join("")}
-        </ol>
+        </ul>
       </div>
     </article>
   `;
@@ -576,7 +577,8 @@ function createSampleSectionMarkup({ categories, prices, samples }) {
         </div>
       </section>
 
-      <div class="sample-nav">
+      <div class="sample-nav-wrap">
+        <div class="sample-nav">
         ${categories
           .map(
             (category) => `
@@ -586,6 +588,7 @@ function createSampleSectionMarkup({ categories, prices, samples }) {
         `
           )
           .join("")}
+      </div>
       </div>
 
       <div class="sample-list">
@@ -1034,51 +1037,126 @@ function escapeHtml(value) {
 
 
 
+
 (function initFormSection(){
   const checks = Array.from(document.querySelectorAll(".form-category-check"));
   const copyBtn = document.getElementById("copyFormBtn");
   const resetBtn = document.getElementById("resetFormBtn");
+  const topBtn = document.getElementById("topBtn");
 
   const platformInput = document.getElementById("formPlatformNickname");
   const characterRef = document.getElementById("formCharacterRef");
   const requestContent = document.getElementById("formRequestContent");
   const etcRequest = document.getElementById("formEtcRequest");
 
-  const optionMap = [
-    { checkTarget: "option-sub-emote", selectId: "subEmoteType", label: "구독티콘" },
-    { checkTarget: "option-sub-badge", selectId: "subBadgeType", label: "구독뱃지" },
-    { checkTarget: "option-profile", selectId: "profileType", label: "프로필" },
-    { checkTarget: "option-banner", selectId: "bannerType", label: "하단배너" },
-    { checkTarget: "option-ziptok", selectId: "ziptokType", label: "짚톡" },
-    { checkTarget: "option-illust", selectId: "illustType", label: "일러스트" }
+  const optionConfigs = [
+    { target: "option-sub-emote", label: "구독티콘", formatter: () => formatQtyLine("구독티콘", "subEmoteQty") },
+    { target: "option-anim-emote", label: "움짤티콘", formatter: () => formatQtyLine("움짤티콘", "animEmoteQty") },
+    { target: "option-sub-badge", label: "구독뱃지", formatter: () => formatQtyLine("구독뱃지", "subBadgeQty") },
+    { target: "option-anim-badge", label: "움짤뱃지", formatter: () => formatQtyLine("움짤뱃지", "animBadgeQty") },
+    { target: "option-profile", label: "프로필 사진", formatter: () => formatQtyLine("프로필 사진", "profileQty") },
+    { target: "option-banner", label: "하단배너", formatter: formatBannerLines },
+    { target: "option-ziptok", label: "짚톡", formatter: formatZiptokLines },
+    { target: "option-illust", label: "일러스트", formatter: formatIllustLines }
   ];
+
+  const illustTypeRadios = Array.from(document.querySelectorAll('input[name="illustType"]'));
+  const illustSdPoseRadios = Array.from(document.querySelectorAll('input[name="illustSdPose"]'));
+  const illustSdBranch = document.getElementById("illustSdBranch");
+  const licenseChecks = [
+    { check: document.getElementById("illustPersonalCheck"), wrap: document.getElementById("illustPersonalQtyWrap"), input: document.getElementById("illustPersonalQty"), label: "개인용" },
+    { check: document.getElementById("illustStreamCheck"), wrap: document.getElementById("illustStreamQtyWrap"), input: document.getElementById("illustStreamQty"), label: "방송용" },
+    { check: document.getElementById("illustCommercialCheck"), wrap: document.getElementById("illustCommercialQtyWrap"), input: document.getElementById("illustCommercialQty"), label: "상업용" }
+  ];
+
+  function getCheckedTarget(targetId){
+    return document.querySelector(`.form-category-check[data-target="${targetId}"]`);
+  }
+
+  function getInputValue(id){
+    return document.getElementById(id)?.value.trim() || "";
+  }
+
+  function getPositiveInt(id){
+    const raw = getInputValue(id);
+    const value = Number(raw);
+    return Number.isFinite(value) && value > 0 ? Math.floor(value) : 0;
+  }
+
+  function formatQtyLine(label, inputId){
+    const qty = getPositiveInt(inputId);
+    return [`- ${label}${qty ? ` / ${qty}개` : ""}`];
+  }
+
+  function formatBannerLines(){
+    const lines = [];
+    const fixed = getPositiveInt("bannerFixedQty");
+    const free = getPositiveInt("bannerFreeQty");
+    if (fixed) lines.push(`- 하단배너 / 고정형 / ${fixed}개`);
+    if (free) lines.push(`- 하단배너 / 자유형 / ${free}개`);
+    return lines.length ? lines : ["- 하단배너"];
+  }
+
+  function formatZiptokLines(){
+    const lines = [];
+    const stand = getPositiveInt("ziptokStandQty");
+    const desk = getPositiveInt("ziptokDeskQty");
+    if (stand) lines.push(`- 짚톡 / 차렷 / ${stand}개`);
+    if (desk) lines.push(`- 짚톡 / 책상 세트 / ${desk}개`);
+    return lines.length ? lines : ["- 짚톡"];
+  }
+
+  function getRadioValue(name){
+    return document.querySelector(`input[name="${name}"]:checked`)?.value || "";
+  }
+
+  function formatIllustLines(){
+    const illustType = getRadioValue("illustType");
+    const sdPose = illustType === "SD" ? getRadioValue("illustSdPose") : "";
+    const prefix = ["일러스트", illustType, sdPose].filter(Boolean).join(" / ");
+    const lines = [];
+
+    licenseChecks.forEach(({ check, input, label }) => {
+      if (!check?.checked) return;
+      const qty = Number(input?.value || 0);
+      lines.push(`- ${prefix || "일러스트"} / ${label}${qty > 0 ? ` / ${Math.floor(qty)}개` : ""}`);
+    });
+
+    return lines.length ? lines : [`- ${prefix || "일러스트"}`];
+  }
 
   function syncOptionCards(){
     checks.forEach((check) => {
-      const targetId = check.dataset.target;
-      const card = document.getElementById(targetId);
-      if (!card) return;
-      card.hidden = !check.checked;
+      const card = document.getElementById(check.dataset.target);
+      if (card) card.hidden = !check.checked;
+    });
+  }
+
+  function syncIllustState(){
+    const type = getRadioValue("illustType");
+    if (illustSdBranch) illustSdBranch.hidden = type !== "SD";
+    if (type !== "SD") {
+      illustSdPoseRadios.forEach((radio) => { radio.checked = false; });
+    }
+  }
+
+  function syncLicenseQty(){
+    licenseChecks.forEach(({ check, wrap, input }) => {
+      if (!wrap || !input || !check) return;
+      wrap.hidden = !check.checked;
+      if (!check.checked) input.value = "";
     });
   }
 
   function getSelectedOptionsText(){
-    const selected = [];
-
-    optionMap.forEach((item) => {
-      const checkbox = document.querySelector(`.form-category-check[data-target="${item.checkTarget}"]`);
-      const select = document.getElementById(item.selectId);
-
-      if (!checkbox || !checkbox.checked) return;
-
-      if (select && select.value) {
-        selected.push(`- ${select.value}`);
-      } else {
-        selected.push(`- ${item.label}`);
-      }
+    const lines = [];
+    optionConfigs.forEach((config) => {
+      const checkbox = getCheckedTarget(config.target);
+      if (!checkbox?.checked) return;
+      const result = config.formatter();
+      if (Array.isArray(result)) lines.push(...result);
     });
-
-    return selected.length ? selected.join("\n") : "-";
+    return lines.length ? lines.join("\n") : "-";
   }
 
   function buildCopyText(){
@@ -1088,57 +1166,39 @@ function escapeHtml(value) {
     const etc = etcRequest?.value.trim() || "-";
     const options = getSelectedOptionsText();
 
-    return `[신청 양식]
-
-방송 플랫폼 / 닉네임
-${platform}
-
-신청하실 타입과 갯수
-${options}
-
-캐릭터 자료
-${character}
-
-신청 내용
-${request}
-
-기타 요청사항
-${etc}`;
+    return `[신청 양식]\n\n방송 플랫폼 / 닉네임\n${platform}\n\n신청하실 타입과 갯수\n${options}\n\n캐릭터 자료\n${character}\n\n신청 내용\n${request}\n\n기타 요청사항\n${etc}`;
   }
 
   function resetForm(){
-    checks.forEach((check) => {
-      check.checked = false;
-      const card = document.getElementById(check.dataset.target);
-      if (card) card.hidden = true;
+    checks.forEach((check) => { check.checked = false; });
+    document.querySelectorAll("#form input, #form textarea").forEach((el) => {
+      if (el.type === "checkbox" || el.type === "radio") {
+        el.checked = false;
+      } else {
+        el.value = "";
+      }
     });
-
-    optionMap.forEach((item) => {
-      const select = document.getElementById(item.selectId);
-      if (select) select.selectedIndex = 0;
-    });
-
-    if (platformInput) platformInput.value = "";
-    if (characterRef) characterRef.value = "";
-    if (requestContent) requestContent.value = "";
-    if (etcRequest) etcRequest.value = "";
+    syncOptionCards();
+    syncIllustState();
+    syncLicenseQty();
   }
 
-  checks.forEach((check) => {
-    check.addEventListener("change", syncOptionCards);
-  });
+  function syncTopButton(){
+    if (!topBtn) return;
+    topBtn.classList.toggle("is-visible", window.scrollY > 320);
+  }
+
+  checks.forEach((check) => check.addEventListener("change", syncOptionCards));
+  illustTypeRadios.forEach((radio) => radio.addEventListener("change", syncIllustState));
+  licenseChecks.forEach(({ check }) => check?.addEventListener("change", syncLicenseQty));
 
   if (copyBtn) {
     copyBtn.addEventListener("click", async () => {
-      const text = buildCopyText();
-
       try {
-        await navigator.clipboard.writeText(text);
+        await navigator.clipboard.writeText(buildCopyText());
         const original = copyBtn.textContent;
         copyBtn.textContent = "복사 완료!";
-        setTimeout(() => {
-          copyBtn.textContent = original;
-        }, 1400);
+        setTimeout(() => { copyBtn.textContent = original; }, 1400);
       } catch (error) {
         console.error(error);
         alert("복사에 실패했습니다. 다시 시도해주세요.");
@@ -1146,9 +1206,12 @@ ${etc}`;
     });
   }
 
-  if (resetBtn) {
-    resetBtn.addEventListener("click", resetForm);
-  }
+  if (resetBtn) resetBtn.addEventListener("click", resetForm);
+  if (topBtn) topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  window.addEventListener("scroll", syncTopButton, { passive: true });
 
   syncOptionCards();
+  syncIllustState();
+  syncLicenseQty();
+  syncTopButton();
 })();
