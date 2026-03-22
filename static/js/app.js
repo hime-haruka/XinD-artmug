@@ -670,7 +670,7 @@ function createSampleCategoryBlock({ category, prices, samples }) {
 function createSampleSubBlock({ category, subSection, prices, samples }) {
   const thumbLimit = SAMPLE_THUMB_LIMITS[category.id] ?? category.thumbCount ?? 0;
   const priceCols = category.id === "illust" ? 3 : 2;
-  const useContain = ["ziptok", "illust", "fanchr"].includes(category.id);
+  const useContain = ["ziptok", "illust"].includes(category.id);
 
   const thumbSamples = getRepresentativeSamples(samples, thumbLimit);
 
@@ -1088,7 +1088,22 @@ function escapeHtml(value) {
     { target: "option-profile", label: "프로필 사진", formatter: () => formatQtyLine("프로필 사진", "profileQty") },
     { target: "option-banner", label: "하단배너", formatter: formatBannerLines },
     { target: "option-ziptok", label: "짚톡", formatter: formatZiptokLines },
-    { target: "option-illust", label: "일러스트", formatter: formatIllustLines }
+    { target: "option-sd-full", label: "SD 일러스트 (전신)", formatter: () => formatLicenseLines("SD 일러스트 (전신)", [
+      { label: "개인용", inputId: "sdFullPersonalQty" },
+      { label: "방송용", inputId: "sdFullStreamQty" },
+      { label: "상업용", inputId: "sdFullCommercialQty" }
+    ]) },
+    { target: "option-sd-bust", label: "SD 일러스트 (흉상)", formatter: () => formatLicenseLines("SD 일러스트 (흉상)", [
+      { label: "개인용", inputId: "sdBustPersonalQty" },
+      { label: "방송용", inputId: "sdBustStreamQty" },
+      { label: "상업용", inputId: "sdBustCommercialQty" }
+    ]) },
+    { target: "option-md-full", label: "MD 일러스트 (전신)", formatter: () => formatLicenseLines("MD 일러스트 (전신)", [
+      { label: "개인용", inputId: "mdFullPersonalQty" },
+      { label: "방송용", inputId: "mdFullStreamQty" },
+      { label: "상업용", inputId: "mdFullCommercialQty" }
+    ]) },
+    { target: "option-fan-character", label: "팬캐릭터", formatter: () => formatQtyLine("팬캐릭터", "fanCharacterQty") }
   ];
 
   const illustTypeRadios = Array.from(document.querySelectorAll('input[name="illustType"]'));
@@ -1135,6 +1150,17 @@ function escapeHtml(value) {
     if (stand) lines.push(`- 짚톡 / 차렷 / ${stand}개`);
     if (desk) lines.push(`- 짚톡 / 책상 세트 / ${desk}개`);
     return lines.length ? lines : ["- 짚톡"];
+  }
+
+  function formatLicenseLines(label, items){
+    const lines = items
+      .map(({ label: subLabel, inputId }) => {
+        const qty = getPositiveInt(inputId);
+        return qty ? `- ${label} / ${subLabel} / ${qty}개` : "";
+      })
+      .filter(Boolean);
+
+    return lines.length ? lines : [`- ${label}`];
   }
 
   function getRadioValue(name){
@@ -1246,5 +1272,3 @@ function escapeHtml(value) {
   syncLicenseQty();
   syncTopButton();
 })();
-
-

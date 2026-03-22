@@ -493,3 +493,18 @@
     padding:10px;
   }
 }
+
+@media (max-width:768px){
+  .sample-thumb,
+  .sample-item,
+  .sample-thumb img,
+  .sample-item img{
+    border-radius:20px !important;
+  }
+
+  .sample-thumb,
+  .sample-item{
+    aspect-ratio:1 / 1 !important;
+    overflow:hidden;
+  }
+}
