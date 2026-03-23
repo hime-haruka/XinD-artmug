@@ -499,7 +499,7 @@
   .sample-item,
   .sample-thumb img,
   .sample-item img{
-    border-radius:20px !important;
+    border-radius:0 !important;
   }
 
   .sample-thumb,
